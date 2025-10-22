@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -76,14 +77,13 @@
     <footer>© ABC-MART Taiwan</footer>
 
     <div class="admin">
-      <button id="resetBtn" title="重置前會要求輸入代碼">重置已兌換</button>
+      <button id="resetBtn" title="清除所有已兌換狀態">重置已兌換</button>
     </div>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-  const RESET_CODE = "8888";
   const KEY_PREFIX = "abc_ticket_redeemed_";
 
   function init() {
@@ -110,10 +110,8 @@
     btn.style.pointerEvents = "none";
   }
 
+  // New: reset without input, just one confirm
   function handleReset() {
-    const input = prompt("請輸入重置代碼以清除所有已兌換狀態：");
-    if (input === null) return;
-    if (input !== RESET_CODE) { toast("代碼錯誤，無法重置"); return; }
     if (!confirm("確定要重置所有已兌換狀態嗎？")) return;
     document.querySelectorAll("button.ticket").forEach(btn => {
       localStorage.removeItem(KEY_PREFIX + btn.dataset.key);
