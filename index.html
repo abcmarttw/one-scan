@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABC-MART｜活動票券</title>
+  <meta name="format-detection" content="telephone=no">
+  <style>
+    :root {
+      --brand: #d6001c;
+      --brand-ink: #fff;
+      --ink: #111;
+      --muted: #666;
+      --bg: #ffffff;
+      --card: #fafafa;
+      --ok: #10b981;
+      --border: #eee;
+      --redeemed: #f1f5f9;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif; }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 40px; }
+    header { text-align:center; margin-bottom: 12px; }
+    .logo {
+      display:inline-flex; align-items:center; justify-content:center;
+      width: 88px; height: 88px; border-radius: 16px;
+      background: var(--brand);
+      box-shadow: 0 8px 20px rgba(214,0,28,0.2);
+    }
+    .logo svg { width:60%; height:60%; }
+    h1 { font-size: 22px; margin: 16px 0 6px; letter-spacing: .02em; }
+    .sub { color: var(--muted); font-size: 14px; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: 16px; padding: 14px; margin-top: 16px; }
+    .list { display:grid; gap: 12px; margin: 6px 0; }
+    button.ticket {
+      width: 100%; display:flex; align-items:center; gap: 12px;
+      padding: 14px 16px; border:none; border-radius: 14px;
+      background: var(--brand); color: var(--brand-ink);
+      font-size: 17px; font-weight: 800; letter-spacing: .02em;
+      box-shadow: 0 6px 14px rgba(214,0,28,.18);
+      cursor: pointer; transition: transform .02s ease;
+    }
+    button.ticket:active { transform: translateY(1px); }
+    .icon { width: 24px; height: 24px; flex: 0 0 24px; display: inline-flex; align-items:center; justify-content:center; }
+    .label { flex: 1; text-align: left; }
+    .status { font-size: 13px; font-weight: 700; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.18); }
+    /* redeemed style */
+    button.ticket.redeemed {
+      background: var(--redeemed);
+      color: #334155;
+      box-shadow: none;
+      border: 1px solid var(--border);
+      cursor: default;
+    }
+    button.ticket.redeemed .status {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <!-- ABC-MART square logo as inline SVG -->
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 100 100" role="img" aria-label="ABC-MART">
+          <rect x="0" y="0" width="100" height="100" fill="#d6001c"/>
+          <g fill="#ffffff">
+            <path d="M20 68 L29 32 L38 68 L33.5 68 L32 62 H26 L24.5 68 Z M27.2 57 H30.8 L29 49 Z"/>
+            <path d="M44 32 H57 q6 0 9.5 3.2T70 42 q0 4.8-3.5 8.1T57 53 H49 v15 H44 Z M49 37 v11 h8 q4 0 6-1.8t2-5.2 q0-6-8-6 Z"/>
+            <path d="M74 32 H92 v5 H80 v8 h10 v5 H80 v13 H74 Z"/>
+          </g>
+        </svg>
+      </div>
+      <h1>活動票券</h1>
+      <div class="sub">點擊對應票券即可前往；已使用會顯示為「已兌換」。</div>
+    </header>
+
+    <section class="card">
+      <div class="list">
+        <button class="ticket" data-key="ticket1" data-url="https://abc-mart.umeans.app/member/ticket/APPTEST01">
+          <span class="icon" aria-hidden="true">
+            <!-- ticket icon -->
+            <svg viewBox="0 0 24 24"><path d="M4 7a1 1 0 0 1 1-1h3a2 2 0 1 0 4 0h7a1 1 0 0 1 1 1v3a2 2 0 1 0 0 4v3a1 1 0 0 1-1 1H9a2 2 0 1 0-4 0H5a1 1 0 0 1-1-1z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">票券 1</span>
+          <span class="status">領取</span>
+        </button>
+
+        <button class="ticket" data-key="ticket2" data-url="https://abc-mart.umeans.app/member/ticket/APPTEST02">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7a1 1 0 0 1 1-1h3a2 2 0 1 0 4 0h7a1 1 0 0 1 1 1v3a2 2 0 1 0 0 4v3a1 1 0 0 1-1 1H9a2 2 0 1 0-4 0H5a1 1 0 0 1-1-1z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">票券 2</span>
+          <span class="status">領取</span>
+        </button>
+
+        <button class="ticket" data-key="ticket3" data-url="https://abc-mart.umeans.app/member/ticket/APPTEST03">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7a1 1 0 0 1 1-1h3a2 2 0 1 0 4 0h7a1 1 0 0 1 1 1v3a2 2 0 1 0 0 4v3a1 1 0 0 1-1 1H9a2 2 0 1 0-4 0H5a1 1 0 0 1-1-1z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">票券 3</span>
+          <span class="status">領取</span>
+        </button>
+
+        <button class="ticket" data-key="ticket4" data-url="https://abc-mart.umeans.app/member/ticket/APPTEST04">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7a1 1 0 0 1 1-1h3a2 2 0 1 0 4 0h7a1 1 0 0 1 1 1v3a2 2 0 1 0 0 4v3a1 1 0 0 1-1 1H9a2 2 0 1 0-4 0H5a1 1 0 0 1-1-1z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">票券 4</span>
+          <span class="status">領取</span>
+        </button>
+      </div>
+    </section>
+
+    <footer>© ABC-MART Taiwan</footer>
+  </div>
+
+<script>
+  const KEY_PREFIX = "abc_ticket_redeemed_";
+
+  // 初始化：把 localStorage 狀態反映到 UI
+  function init() {
+    document.querySelectorAll("button.ticket").forEach(btn => {
+      const key = KEY_PREFIX + btn.dataset.key;
+      if (localStorage.getItem(key) === "1") {
+        setRedeemed(btn);
+      }
+      btn.addEventListener("click", () => handleClick(btn));
+    });
+  }
+
+  function handleClick(btn) {
+    if (btn.classList.contains("redeemed")) return;
+    const url = btn.dataset.url;
+    // 1. 開啟連結（新分頁）
+    window.open(url, "_blank");
+    // 2. 標記已兌換
+    localStorage.setItem(KEY_PREFIX + btn.dataset.key, "1");
+    setRedeemed(btn);
+  }
+
+  function setRedeemed(btn) {
+    btn.classList.add("redeemed");
+    const st = btn.querySelector(".status");
+    st.textContent = "✅ 已兌換";
+    // 為避免誤觸，兌換後移除指標樣式
+    btn.style.pointerEvents = "none";
+    btn.setAttribute("aria-disabled", "true");
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
