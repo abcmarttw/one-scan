@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABC-MART｜一掃全開</title>
+  <style>
+    :root { --brand:#d6001c; --ink:#111; --muted:#666; --bg:#fff; --card:#fafafa; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif; color:var(--ink); background:var(--bg); }
+    header { padding:28px 20px 12px; text-align:center; }
+    .title { font-size:20px; font-weight:800; letter-spacing:0.02em; }
+    .subtitle { color:var(--muted); font-size:14px; margin-top:6px; }
+    .wrap { max-width:680px; margin:0 auto; padding:16px 16px 28px; }
+    .card { background:var(--card); border:1px solid #eee; border-radius:16px; padding:18px; }
+    .cta { width:100%; padding:16px; font-size:18px; font-weight:800; border:none; border-radius:12px; background:var(--brand); color:#fff; cursor:pointer; }
+    .cta:active { transform: translateY(1px); }
+    .links { margin-top:16px; display:grid; gap:10px; }
+    .link-row { display:flex; gap:8px; align-items:center; background:#fff; border:1px solid #eee; border-radius:12px; padding:10px; }
+    .url { flex:1; overflow:auto; font-size:13px; white-space:nowrap; }
+    .btn { padding:8px 10px; font-size:13px; border-radius:10px; border:1px solid #ddd; background:#f8f8f8; cursor:pointer; }
+    .btn:active { transform: translateY(1px); }
+    footer { text-align:center; color:var(--muted); font-size:12px; margin-top:16px; }
+    .note { font-size:13px; color:#444; margin-top:12px; line-height:1.6; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">一掃全開｜領取票券</div>
+    <div class="subtitle">點一下就幫你開啟 4 個連結；若被瀏覽器阻擋，可改用下方個別開啟</div>
+  </header>
+  <div class="wrap">
+    <div class="card">
+      <button id="openAll" class="cta">一鍵開啟全部票券</button>
+      <div class="note" id="status"></div>
+      <div class="links">
+        <div class="link-row">
+          <span class="url">https://abc-mart.umeans.app/member/ticket/APPTEST01</span>
+          <button class="btn" onclick="openOne('https://abc-mart.umeans.app/member/ticket/APPTEST01')">開啟</button>
+          <button class="btn" onclick="copy('https://abc-mart.umeans.app/member/ticket/APPTEST01')">複製</button>
+        </div>
+        <div class="link-row">
+          <span class="url">https://abc-mart.umeans.app/member/ticket/APPTEST02</span>
+          <button class="btn" onclick="openOne('https://abc-mart.umeans.app/member/ticket/APPTEST02')">開啟</button>
+          <button class="btn" onclick="copy('https://abc-mart.umeans.app/member/ticket/APPTEST02')">複製</button>
+        </div>
+        <div class="link-row">
+          <span class="url">https://abc-mart.umeans.app/member/ticket/APPTEST03</span>
+          <button class="btn" onclick="openOne('https://abc-mart.umeans.app/member/ticket/APPTEST03')">開啟</button>
+          <button class="btn" onclick="copy('https://abc-mart.umeans.app/member/ticket/APPTEST03')">複製</button>
+        </div>
+        <div class="link-row">
+          <span class="url">https://abc-mart.umeans.app/member/ticket/APPTEST04</span>
+          <button class="btn" onclick="openOne('https://abc-mart.umeans.app/member/ticket/APPTEST04')">開啟</button>
+          <button class="btn" onclick="copy('https://abc-mart.umeans.app/member/ticket/APPTEST04')">複製</button>
+        </div>
+      </div>
+    </div>
+    <footer>© ABC-MART Taiwan</footer>
+  </div>
+<script>
+  const urls = [
+    "https://abc-mart.umeans.app/member/ticket/APPTEST01",
+    "https://abc-mart.umeans.app/member/ticket/APPTEST02",
+    "https://abc-mart.umeans.app/member/ticket/APPTEST03",
+    "https://abc-mart.umeans.app/member/ticket/APPTEST04",
+  ];
+
+  // 開啟單一連結（給下方個別按鈕用）
+  function openOne(u){ window.open(u, "_blank"); }
+
+  // 複製到剪貼簿
+  async function copy(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("已複製連結");
+    }catch(e){
+      toast("這個瀏覽器不支援自動複製");
+    }
+  }
+
+  // 顯示小提示
+  let toastTimer;
+  function toast(msg){
+    const s = document.getElementById("status");
+    s.textContent = msg;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> s.textContent = "", 2500);
+  }
+
+  // 一鍵開啟：同一個使用者點擊手勢中開四個視窗（行動裝置可能仍會阻擋，視瀏覽器策略而定）
+  document.getElementById("openAll").addEventListener("click", () => {
+    let opened = 0;
+    urls.forEach((u, i) => {
+      // 以微延遲排開，有助於部分瀏覽器降低擋彈窗的機率
+      setTimeout(() => {
+        const w = window.open(u, "_blank");
+        if (w) opened++;
+        if (i === urls.length - 1){
+          if (opened === urls.length){
+            toast("已在新分頁開啟 4 個票券");
+          } else if (opened > 0){
+            toast(`已開啟 ${opened} 個；其餘可能被瀏覽器阻擋，請改用下方個別按鈕`);
+          } else {
+            toast("看起來被阻擋了，請逐一點選下方連結開啟");
+          }
+        }
+      }, i * 100);
+    });
+  });
+</script>
+</body>
+</html>
